@@ -71,7 +71,7 @@ export async function handler(event) {
         'X-Title': 'Langer Pereira Portfolio',
       },
       body: JSON.stringify({
-        model: 'google/gemma-4-31b-it:free',
+        model: 'qwen/qwen3-8b:free',
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
           ...messages,
