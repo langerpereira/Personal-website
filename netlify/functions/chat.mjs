@@ -54,40 +54,40 @@ export async function handler(event) {
     return { statusCode: 405, body: 'Method not allowed' }
   }
 
-  const apiKey = process.env.OPENROUTER_API_KEY
-  if (!apiKey) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'API key not configured' }) }
+  const token = process.env.CF_API_TOKEN
+  const accountId = process.env.CF_ACCOUNT_ID
+  if (!token || !accountId) {
+    return { statusCode: 500, body: JSON.stringify({ error: 'API credentials not configured' }) }
   }
 
   try {
     const { messages } = JSON.parse(event.body)
 
-    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://langer-pereira.netlify.app',
-        'X-Title': 'Langer Pereira Portfolio',
-      },
-      body: JSON.stringify({
-        model: 'qwen/qwen3-8b:free',
-        messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
-          ...messages,
-        ],
-        max_tokens: 300,
-        temperature: 0.7,
-      }),
-    })
+    const res = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/run/@cf/meta/llama-3.1-8b-instruct`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [
+            { role: 'system', content: SYSTEM_PROMPT },
+            ...messages,
+          ],
+          max_tokens: 300,
+        }),
+      }
+    )
 
     const data = await res.json()
 
-    if (!res.ok) {
+    if (!res.ok || !data.success) {
       return { statusCode: 502, body: JSON.stringify({ error: JSON.stringify(data) }) }
     }
 
-    const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response."
+    const reply = data.result?.response || "Sorry, I couldn't generate a response."
 
     return {
       statusCode: 200,
