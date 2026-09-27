@@ -81,12 +81,12 @@ export async function handler(event) {
       }),
     })
 
+    const data = await res.json()
+
     if (!res.ok) {
-      const err = await res.text()
-      return { statusCode: 502, body: JSON.stringify({ error: 'API error', details: err }) }
+      return { statusCode: 502, body: JSON.stringify({ error: JSON.stringify(data) }) }
     }
 
-    const data = await res.json()
     const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response."
 
     return {
