@@ -36,18 +36,25 @@ CONTACT:
 LANGUAGES SPOKEN:
 English, German (learning), Hindi, Konkani
 
-Keep responses brief (2-4 sentences). Be friendly and professional. If you don't know something specific, say so honestly rather than making it up.`
+Keep responses brief (2-4 sentences). Be friendly and professional. If asked "hi" or casual greetings, respond warmly and invite them to ask about Langer's experience or skills. If you don't know something specific, say so honestly rather than making it up.`
 
 export async function handler(event) {
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Allow-Methods': 'POST' } }
+    return {
+      statusCode: 204,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST',
+      },
+    }
   }
 
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method not allowed' }
   }
 
-  const apiKey = process.env.GEMINI_API_KEY
+  const apiKey = process.env.OPENROUTER_API_KEY
   if (!apiKey) {
     return { statusCode: 500, body: JSON.stringify({ error: 'API key not configured' }) }
   }
@@ -55,38 +62,42 @@ export async function handler(event) {
   try {
     const { messages } = JSON.parse(event.body)
 
-    const contents = messages.map(m => ({
-      role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.content }],
-    }))
-
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-          contents,
-          generationConfig: { maxOutputTokens: 300, temperature: 0.7 },
-        }),
-      }
-    )
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://langer-pereira.netlify.app',
+        'X-Title': 'Langer Pereira Portfolio',
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-2.0-flash-exp:free',
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...messages,
+        ],
+        max_tokens: 300,
+        temperature: 0.7,
+      }),
+    })
 
     if (!res.ok) {
       const err = await res.text()
-      return { statusCode: 502, body: JSON.stringify({ error: 'Gemini API error', details: err }) }
+      return { statusCode: 502, body: JSON.stringify({ error: 'API error', details: err }) }
     }
 
     const data = await res.json()
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response."
+    const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response."
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
       body: JSON.stringify({ reply }),
     }
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'Internal error' }) }
+    return { statusCode: 500, body: JSON.stringify({ error: 'Internal error', details: err.message }) }
   }
 }
