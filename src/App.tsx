@@ -529,7 +529,7 @@ function ChatWidget() {
                 body: JSON.stringify({ messages: updated }),
             })
             const data = await res.json()
-            setMessages(prev => [...prev, { role: 'assistant', content: data.reply || 'Sorry, something went wrong.' }])
+            setMessages(prev => [...prev, { role: 'assistant', content: data.reply || data.error || 'Sorry, something went wrong.' }])
         } catch {
             setMessages(prev => [...prev, { role: 'assistant', content: 'Could not reach the server. Please try again.' }])
         } finally { setLoading(false) }
