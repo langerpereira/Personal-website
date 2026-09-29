@@ -124,9 +124,9 @@ const t = {
 
 const navIds = ['about', 'experience', 'projects', 'contact'] as const
 
-const heroVideo = '/hero-video.mp4'
+const heroVideo = '/hero-video%20(1).mp4'
 
-const processVideo = '/process-video.mp4'
+const processVideo = '/process-video%20(1).mp4'
 
 const ease = [0.16, 1, 0.3, 1] as const
 
@@ -187,7 +187,7 @@ function Hero() {
 
     return <section className="h-screen bg-black p-4 md:p-6">
         <div className="relative h-full overflow-hidden rounded-2xl md:rounded-[2rem]">
-            <video className="absolute inset-0 h-full w-full object-cover" src={heroVideo} autoPlay loop muted playsInline />
+            <video className="absolute inset-0 h-full w-full object-cover" src={heroVideo} poster="/hero.png" autoPlay loop muted playsInline />
             <div className="noise-overlay pointer-events-none absolute inset-0 z-10 opacity-[0.7] mix-blend-overlay" />
             <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
 
