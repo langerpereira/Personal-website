@@ -1,0 +1,170 @@
+{
+  "featured": [
+    {
+      "id": "Study-Abroad-CRM",
+      "title": "Study Abroad CRM",
+      "description_en": "Counsellors tracked student applications across scattered spreadsheets and inboxes, making the status of any single application hard to establish. The CRM centralises that data — student profile management, application tracking, role-based access control for counsellors and administrators, and a unified view across the full application lifecycle.",
+      "description_de": "Berater verfolgten Studentenbewerbungen über verteilte Tabellen und Postfächer, was den Status einzelner Bewerbungen schwer nachvollziehbar machte. Das CRM zentralisiert diese Daten — Studentenprofilverwaltung, Bewerbungsverfolgung, rollenbasierte Zugriffskontrolle und eine einheitliche Übersicht über den gesamten Bewerbungsprozess.",
+      "tags": ["Final Year Project", "Angular", "Spring Boot", "MySQL"],
+      "image": "/15.png",
+      "link": ""
+    },
+    {
+      "id": "Uppal-property-estate",
+      "title": "Uppal Property Estate",
+      "description_en": "A real estate website to browse and buy properties, built with a clean UI and smooth filtering.",
+      "description_de": "Eine Immobilien-Website zum Durchsuchen und Kaufen von Immobilien, mit sauberem UI und flüssiger Filterung.",
+      "tags": ["Freelancing", "React", "Tailwind", "Database"],
+      "image": "/16.png",
+      "link": "https://uppalpropertyestatesltd.com/"
+    },
+    {
+      "id": "JUJU-Redesigned",
+      "title": "JUJU Redesigned",
+      "description_en": "The redesigned website for Juju Restaurant captures the essence of fine dining through an elegant colour palette, sophisticated typography, and immersive imagery. Modern design solutions address previous UX challenges, reflect the brand's identity, and drive customer engagement.",
+      "description_de": "Die neu gestaltete Website für das Restaurant Juju verkörpert die Essenz des gehobenen Dining-Erlebnisses durch eine elegante Farbpalette, anspruchsvolle Typografie und fesselnde Bildsprache. Moderne Designlösungen verbessern die Nutzererfahrung, spiegeln die Markenidentität wider und stärken die Kundenbindung.",
+      "tags": ["Design", "Figma", "Animation"],
+      "image": "/17.png",
+      "link": "https://dribbble.com/shots/25997263-JUJU-Redesigned"
+    },
+    {
+      "id": "betterfutureeducationservices",
+      "title": "Better Future Education Services",
+      "description_en": "A professional education consultancy website designed to help students explore study opportunities abroad, discover suitable programmes, and access guidance throughout their international education journey.",
+      "description_de": "Eine professionelle Bildungsberatungswebsite, die Studierenden hilft, Studienmöglichkeiten im Ausland zu erkunden, geeignete Programme zu finden und während ihrer internationalen Bildungsreise kompetente Beratung zu erhalten.",
+      "tags": ["Freelancing", "Prisma JS", "Neon DB"],
+      "image": "/18.png",
+      "link": "https://betterfutureeducationservices.co.uk/"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "passion-estate",
+      "title": "Passion Estate",
+      "description_en": "A real estate website to browse and buy properties, built with a clean UI and smooth filtering.",
+      "description_de": "Eine Immobilien-Website zum Durchsuchen und Kaufen von Immobilien, mit sauberem UI und flüssiger Filterung.",
+      "tags": ["HTML & CSS", "Bootstrap", "PHP"],
+      "image": "/14.png",
+      "link": "https://github.com/langerpereira/Passion-Estates"
+    },
+    {
+      "id": "rejouice",
+      "title": "Rejouice",
+      "description_en": "REJOUICE®, a digital brand accelerator from Paris and San Diego. Recreated their immersive web experience with GSAP animations.",
+      "description_de": "REJOUICE®, ein digitaler Markenbeschleuniger aus Paris und San Diego. Ihre immersive Web-Erfahrung mit GSAP-Animationen nachgebaut.",
+      "tags": ["HTML & CSS", "JavaScript", "GSAP"],
+      "image": "/5.png",
+      "link": "https://rejouice-xi.vercel.app"
+    },
+    {
+      "id": "tesla",
+      "title": "Tesla Clone",
+      "description_en": "A Tesla-inspired landing page with responsive layouts and focused product presentation.",
+      "description_de": "Eine Tesla-inspirierte Landingpage mit responsiven Layouts und fokussierter Produktpräsentation.",
+      "tags": ["HTML", "Tailwind CSS"],
+      "image": "/13.png",
+      "link": "https://github.com/langerpereira/Tesla_clone"
+    },
+    {
+      "id": "jovian",
+      "title": "Jovian Careers",
+      "description_en": "A job listings website built with Flask and SQLAlchemy, showcasing available roles with a clean interface.",
+      "description_de": "Eine Stellenbörse mit Flask und SQLAlchemy, die verfügbare Stellen mit sauberem Interface präsentiert.",
+      "tags": ["Flask", "SQLAlchemy"],
+      "image": "/10.png",
+      "link": "https://github.com/langerpereira/jovian-careers-website-v2-database-"
+    },
+    {
+      "id": "guest-house",
+      "title": "Guest House",
+      "description_en": "A personal project exploring responsive interfaces, interaction, and visual storytelling.",
+      "description_de": "Ein persönliches Projekt zur Erforschung responsiver Oberflächen, Interaktion und visueller Erzählung.",
+      "tags": ["HTML", "JavaScript"],
+      "image": "/11.png",
+      "link": "https://langerpereira.github.io/Guest-House/"
+    },
+    {
+      "id": "animated-website",
+      "title": "Animated Website",
+      "description_en": "A personal project exploring responsive interfaces, interaction, and visual storytelling.",
+      "description_de": "Ein persönliches Projekt zur Erforschung responsiver Oberflächen, Interaktion und visueller Erzählung.",
+      "tags": ["HTML", "JavaScript"],
+      "image": "/12.png",
+      "link": "https://github.com/langerpereira/WEBSITE-1"
+    },
+    {
+      "id": "3d-sphere",
+      "title": "3D Sphere",
+      "description_en": "A personal project exploring responsive interfaces, interaction, and visual storytelling.",
+      "description_de": "Ein persönliches Projekt zur Erforschung responsiver Oberflächen, Interaktion und visueller Erzählung.",
+      "tags": ["HTML", "JavaScript"],
+      "image": "/1.png",
+      "link": ""
+    },
+    {
+      "id": "r3f-showcase",
+      "title": "R3F Showcase",
+      "description_en": "A personal project exploring responsive interfaces, interaction, and visual storytelling.",
+      "description_de": "Ein persönliches Projekt zur Erforschung responsiver Oberflächen, Interaktion und visueller Erzählung.",
+      "tags": ["React", "Three.js"],
+      "image": "/2.png",
+      "link": ""
+    },
+    {
+      "id": "lagunitas",
+      "title": "Lagunitas",
+      "description_en": "A personal project exploring responsive interfaces, interaction, and visual storytelling.",
+      "description_de": "Ein persönliches Projekt zur Erforschung responsiver Oberflächen, Interaktion und visueller Erzählung.",
+      "tags": ["HTML", "CSS"],
+      "image": "/3.png",
+      "link": "https://lagunitas-mu.vercel.app"
+    },
+    {
+      "id": "Parallax-Website",
+      "title": "Parallax Website",
+      "description_en": "A personal project exploring responsive interfaces, interaction, and visual storytelling.",
+      "description_de": "Ein persönliches Projekt zur Erforschung responsiver Oberflächen, Interaktion und visueller Erzählung.",
+      "tags": ["React", "JavaScript"],
+      "image": "/6.png",
+      "link": "https://langerpereira.github.io/Parallax-Website/"
+    }
+  ],
+  "design": [
+    {
+      "id": "Scroll-Animated-Design",
+      "title": "Scroll Animated Design",
+      "description_en": "Design of a scroll-animated landing page for a hummingbird, created in Figma and animated with After Effects.",
+      "description_de": "Design einer scroll-animierten Landing Page für einen Kolibri, erstellt in Figma und animiert mit After Effects.",
+      "tags": ["Figma", "UI/UX", "After Effects"],
+      "image": "/19.png",
+      "link": "https://dribbble.com/shots/25966995-3D-Landing-Page-Humming-Bird"
+    },
+    {
+      "id": "Solo-Leveling-UI-Design",
+      "title": "Solo Leveling UI Design",
+      "description_en": "Inspired by the iconic Solo Leveling manhwa, this UI design blends dark fantasy aesthetics with a sleek modern interface — bold typography, moody colours, and dynamic layouts that capture the energy and mystery of the series.",
+      "description_de": "Inspiriert vom ikonischen Solo Leveling Manhwa, verbindet dieses UI-Design Dark-Fantasy-Ästhetik mit einem eleganten, modernen Interface — fette Typografie, düstere Farben und dynamische Layouts, die die Energie und Mystik der Serie einfangen.",
+      "tags": ["Figma", "Visual Design"],
+      "image": "/20.png",
+      "link": "https://dribbble.com/shots/25916934-Solo-Leveling-UI-Concept-Figma-Design"
+    },
+    {
+      "id": "LensVerve",
+      "title": "LensVerve",
+      "description_en": "A concept for smart eyewear where technology meets style. Intelligent glasses redefined through customisation, connectivity, and innovation — sleek, modern, and ultra-functional design that puts the future on your face.",
+      "description_de": "Ein Konzept für intelligente Eyewear, bei dem Technologie auf Stil trifft. Smarte Brillen neu definiert durch Individualisierung, Konnektivität und Innovation — modernes, ultra-funktionales Design.",
+      "tags": ["Figma", "Motion Design"],
+      "image": "/21.png",
+      "link": "https://dribbble.com/shots/25730504-LensVerve"
+    },
+    {
+      "id": "KickVault",
+      "title": "KickVault",
+      "description_en": "A sneaker museum that celebrates the culture and history of sneakers. Vintage meets modern — bold typography with clean layouts for an immersive experience, from exploring sneaker design evolution to seamless ticket booking.",
+      "description_de": "Ein Sneaker-Museum, das die Kultur und Geschichte der Sneaker zelebriert. Vintage trifft auf Moderne — kühne Typografie mit klaren Layouts für ein immersives Erlebnis, von der Evolution des Sneaker-Designs bis zur nahtlosen Ticketbuchung.",
+      "tags": ["Figma", "Prototyping"],
+      "image": "/22.png",
+      "link": "https://dribbble.com/shots/25722312-KickVault"
+    }
+  ]
+}

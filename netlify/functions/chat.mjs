@@ -32,6 +32,8 @@ CONTACT:
 - Email: langerpereira12@gmail.com
 - GitHub: github.com/langerpereira
 - LinkedIn: linkedin.com/in/langer-pereira-ab4543278
+- Portfolio: langerpereira.com
+- dribble: dribbble.com/langer123
 
 LANGUAGES SPOKEN:
 English, German (learning), Hindi, Konkani

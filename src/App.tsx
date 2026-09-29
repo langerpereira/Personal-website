@@ -1,9 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type FormEvent, type PointerEvent } from 'react'
+import projectsData from './projects.json'
 import { AnimatePresence, motion, useInView, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from 'framer-motion'
 import { ArrowRight, Menu, MessageCircle, Send, X } from 'lucide-react'
 
 type Lang = 'en' | 'de'
-const LangContext = createContext<{ lang: Lang; toggle: () => void }>({ lang: 'en', toggle: () => { } })
+const LangContext = createContext<{ lang: Lang; toggle: () => void }>({ lang: 'de', toggle: () => { } })
 const useLang = () => useContext(LangContext)
 
 const t = {
@@ -60,12 +61,6 @@ const t = {
         chatTitle: 'Ask about Langer',
         chatPlaceholder: 'Ask me anything...',
         chatGreeting: "Hi! I'm Langer's assistant. Ask me about his skills, experience, or availability.",
-        caseStudies: [
-            { description: 'A real estate website to buy properties.' },
-            { description: 'REJOUICE®, a digital brand accelerator operating from Paris and San Diego. They specialize in designing and developing.' },
-            { description: 'A Tesla-inspired landing page recreated with responsive layouts and focused product presentation.' },
-            { description: 'A website designed using Flask, a Python framework, which showcases the different jobs available.' },
-        ],
         galleryDesc: 'A personal project exploring responsive interfaces, interaction, and visual storytelling.',
         menuLabel: 'MENU',
     },
@@ -122,12 +117,6 @@ const t = {
         chatTitle: 'Fragen zu Langer',
         chatPlaceholder: 'Stellen Sie eine Frage...',
         chatGreeting: 'Hallo! Ich bin Langers Assistent. Fragen Sie mich zu seinen Kenntnissen, Erfahrungen oder Verfügbarkeit.',
-        caseStudies: [
-            { description: 'Eine Immobilien-Website zum Kauf von Immobilien.' },
-            { description: 'REJOUICE®, ein digitaler Markenbeschleuniger aus Paris und San Diego. Spezialisiert auf Design und Entwicklung.' },
-            { description: 'Eine Tesla-inspirierte Landingpage mit responsiven Layouts und fokussierter Produktpräsentation.' },
-            { description: 'Eine Website, die mit Flask, einem Python-Framework, entwickelt wurde und verschiedene verfügbare Stellenangebote präsentiert.' },
-        ],
         galleryDesc: 'Ein persönliches Projekt zur Erforschung responsiver Oberflächen, Interaktion und visueller Erzählung.',
         menuLabel: 'MENÜ',
     },
@@ -237,7 +226,7 @@ function Hero() {
                 )}
             </AnimatePresence>
 
-            <div className="absolute bottom-0 left-0 z-20 flex w-full flex-col gap-4 p-5 pb-7 sm:p-8 sm:pb-10 md:flex-row md:items-end md:justify-between md:p-10 md:pb-12">
+            <div className="absolute bottom-0 left-0 z-20 flex w-full flex-col gap-4 p-5 pb-16 sm:p-8 sm:pb-10 md:flex-row md:items-end md:justify-between md:p-10 md:pb-12">
                 <h1 style={{ fontFamily: "'Instrument Serif', serif" }} className="overflow-visible text-[clamp(3.5rem,14vw,10rem)] font-normal leading-[0.85] tracking-[-0.07em] text-[#E1E0CC]"><WordsPullUp text="Langer Pereira" /></h1>
                 <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.8, ease }} className="flex items-center gap-3">
                     <a href="/Langer-Pereira's-cv-main.pdf" target="_blank" rel="noopener noreferrer" className="group flex w-max shrink-0 items-center gap-2 rounded-full bg-primary py-1 pl-4 pr-1 text-sm font-medium text-black transition-all hover:gap-3 sm:text-base">{s.resume} <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black transition-transform group-hover:scale-110 sm:h-10 sm:w-10"><ArrowRight size={18} color="#E1E0CC" /></span></a>
@@ -292,12 +281,13 @@ function Skills() {
     </div></div></section>
 }
 
-const caseStudiesData = [
-    { id: 'Passion Estate', title: 'Passion_Estate', tags: ['HTML & CSS', 'Bootstrap', 'PHP'], image: '/14.png', squares: [[5, 30, 16], [10, 42, 10], [3, 52, 7], [80, 70, 14], [85, 82, 9], [78, 60, 6]] },
-    { id: 'rejouice', title: 'Rejouice', tags: ['HTML & CSS', 'JavaScript & Gsap'], image: '/5.png', squares: [[82, 55, 16], [88, 68, 10], [78, 72, 7], [85, 42, 6], [90, 80, 8]] },
-    { id: 'tesla', title: 'Tesla Clone', tags: ['HTML', 'Tailwind CSS'], image: '/13.png', squares: [[4, 24, 16], [10, 36, 10], [2, 44, 7], [78, 78, 14], [84, 88, 8]] },
-    { id: 'jovian', title: 'Jovian Careers', tags: ['Flask', 'SQLAlchemy'], image: '/10.png', squares: [[82, 26, 14], [88, 38, 10], [78, 44, 7], [84, 54, 5], [90, 60, 8]] },
+const featuredSquares = [
+    [[5, 30, 16], [10, 42, 10], [3, 52, 7], [80, 70, 14], [85, 82, 9], [78, 60, 6]],
+    [[82, 55, 16], [88, 68, 10], [78, 72, 7], [85, 42, 6], [90, 80, 8]],
+    [[4, 24, 16], [10, 36, 10], [2, 44, 7], [78, 78, 14], [84, 88, 8]],
+    [[82, 26, 14], [88, 38, 10], [78, 44, 7], [84, 54, 5], [90, 60, 8]],
 ]
+const defaultSquares = [[8, 28, 12], [86, 64, 10], [78, 82, 7]]
 
 type ExperienceEntry = { period: string; role: string; company: string; description: string }
 
@@ -393,7 +383,9 @@ function MagneticSquare({ x, y, size, pointerX, pointerY }: { x: number; y: numb
     return <motion.span className="pointer-events-none absolute z-10 bg-[#E1E0CC]" style={{ left: `${x}%`, top: `${y}%`, width: size, height: size, x: shiftX, y: shiftY }} data-magnetic-square={true} />
 }
 
-function CaseStudyCard({ study, index }: { study: typeof caseStudiesData[number] & { description: string }; index: number }) {
+type StudyCard = { id: string; title: string; tags: string[]; image: string; squares: number[][]; description: string; link?: string }
+
+function CaseStudyCard({ study, index }: { study: StudyCard; index: number }) {
     const [hovered, setHovered] = useState(false)
     const cardRef = useRef<HTMLDivElement>(null)
     const pointerX = useMotionValue(0.5)
@@ -410,25 +402,127 @@ function CaseStudyCard({ study, index }: { study: typeof caseStudiesData[number]
         <img src={study.image} alt={`${study.title} case study`} className="absolute inset-0 h-full w-full object-cover brightness-[.7] contrast-[1.05] saturate-[.9] transition duration-700 group-hover:brightness-[.82] group-hover:scale-105" /><div className="bg-noise pointer-events-none absolute inset-0 z-[4] opacity-[0.2] mix-blend-screen" /><div className="pointer-events-none absolute inset-0 z-[5] grid grid-cols-12 grid-rows-8">
             {Array.from({ length: 96 }, (_, block) => { const row = Math.floor(block / 12); const col = block % 12; return <motion.span key={block} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0 }} transition={{ duration: 0.25, delay: hovered ? (row + col) * 0.018 : ((8 - row) + (12 - col)) * 0.012 }} className="bg-black/80" /> })}
         </div>{study.squares.map(([x, y, size]) => <MagneticSquare key={`${x}-${y}`} x={x} y={y} size={size} pointerX={pointerX} pointerY={pointerY} />)}
-        <div className="absolute bottom-0 left-0 z-20 max-w-[82%] bg-[#E1E0CC] px-4 pb-3 pt-2.5"><h3 className="text-[clamp(1.4rem,2.2vw,2rem)] leading-tight text-black">{study.title}</h3><p className="mt-1.5 max-w-[30rem] text-[11px] leading-[1.35] text-black/65">{study.description}</p></div>
+        <motion.div
+            className="absolute bottom-0 left-0 z-20 w-full bg-[#E1E0CC] px-4 pb-3 pt-2.5"
+            animate={{ height: hovered ? 'auto' : undefined }}
+        >
+            <h3 className="text-[clamp(1.4rem,2.2vw,2rem)] leading-tight text-black">{study.title}</h3>
+            <p className={`mt-1.5 max-w-[40rem] text-[11px] leading-[1.5] text-black/65 ${hovered ? '' : 'line-clamp-2'}`}>
+                {study.description}
+            </p>
+            <AnimatePresence>
+                {hovered && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 4 }}
+                        transition={{ duration: 0.25, delay: 0.05 }}
+                        className="mt-2.5 flex flex-wrap items-center justify-between gap-2"
+                    >
+                        <div className="flex flex-wrap gap-1.5">
+                            {study.tags.map(tag => (
+                                <span key={tag} className="rounded-full bg-black/10 px-2.5 py-0.5 text-[10px] font-medium text-black/60">{tag}</span>
+                            ))}
+                        </div>
+                        {study.link && (
+                            <a
+                                href={study.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={e => e.stopPropagation()}
+                                className="inline-flex shrink-0 items-center gap-1 rounded-full bg-black px-3 py-1 text-[10px] font-medium text-white transition hover:bg-black/80"
+                            >
+                                View <ArrowRight size={10} />
+                            </a>
+                        )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     </motion.article>
 }
 
 function AllProjects({ onBack }: { onBack: () => void }) {
     const { lang } = useLang()
     const s = t[lang]
-    const caseStudies = caseStudiesData.map((cs, i) => ({ ...cs, description: s.caseStudies[i].description }))
-    const gallery = [...caseStudies, ...['11.png', '12.png', '1.png', '2.png', '3.png', '4.png', '6.png', '7.png', '8.png'].map((image, index) => ({ id: `design-${index}`, title: ['Guest House', 'Animated Website', '3D Sphere', 'R3F Showcase', 'Lagunitas', 'Real Estate', 'Parallax', 'Whack-a-Mole', 'Weather App'][index], description: s.galleryDesc, tags: ['HTML', 'JavaScript'], image, squares: [[8, 28, 12], [86, 64, 10], [78, 82, 7]] }))]
-    return <main className="min-h-screen bg-black text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-        <div className="mx-auto max-w-7xl px-6 pb-12 pt-10 sm:px-10 lg:px-16 lg:pt-14"><button type="button" onClick={onBack} className="liquid-glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm text-white transition hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"><ArrowRight size={15} className="rotate-180" /> {s.backToPortfolio}</button><h1 className="mt-24 text-right text-[clamp(4rem,13vw,10rem)] leading-[0.78] tracking-[-0.07em] text-[#E1E0CC]">{s.projectsAndDesigns.split('\n').map((line, i) => <span key={i}>{i > 0 && <br />}{line}</span>)}</h1></div>
-        <div className="mx-auto grid max-w-7xl gap-4 px-6 pb-20 sm:px-10 md:grid-cols-2 lg:px-16">{gallery.map((study, index) => <CaseStudyCard key={study.id} study={study} index={index % 4} />)}</div>
-    </main>
+    const caseStudies: StudyCard[] = projectsData.featured.map((p, i) => ({
+        id: p.id,
+        title: p.title,
+        tags: p.tags,
+        image: p.image,
+        link: p.link,
+        squares: featuredSquares[i] ?? defaultSquares,
+        description: lang === 'en' ? p.description_en : p.description_de,
+    }))
+    const galleryItems: StudyCard[] = projectsData.gallery.map((p) => ({
+        id: p.id,
+        title: p.title,
+        tags: p.tags,
+        image: p.image,
+        link: p.link,
+        squares: defaultSquares,
+        description: lang === 'en' ? p.description_en : p.description_de || s.galleryDesc,
+    }))
+    const designItems: StudyCard[] = projectsData.design.map((p) => ({
+        id: p.id,
+        title: p.title,
+        tags: p.tags,
+        image: p.image,
+        link: p.link,
+        squares: defaultSquares,
+        description: lang === 'en' ? p.description_en : p.description_de,
+    }))
+    const allProjects = [...caseStudies, ...galleryItems]
+    return (
+        <main className="min-h-screen bg-black text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            <div className="mx-auto max-w-7xl px-6 pb-12 pt-10 sm:px-10 lg:px-16 lg:pt-14">
+                <button type="button" onClick={onBack} className="liquid-glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm text-white transition hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70">
+                    <ArrowRight size={15} className="rotate-180" /> {s.backToPortfolio}
+                </button>
+                <h1 className="mt-24 text-right text-[clamp(4rem,13vw,10rem)] leading-[0.78] tracking-[-0.07em] text-[#E1E0CC]">
+                    {s.projectsAndDesigns.split('\n').map((line, i) => <span key={i}>{i > 0 && <br />}{line}</span>)}
+                </h1>
+            </div>
+
+            {/* Projects */}
+            <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+                <div className="mb-5 flex items-center gap-4">
+                    <span className="text-[10px] tracking-[0.22em] text-white/30">{lang === 'en' ? 'PROJECTS' : 'PROJEKTE'}</span>
+                    <div className="h-px flex-1 bg-white/10" />
+                    <span className="text-[10px] text-white/20">{allProjects.length}</span>
+                </div>
+                <div className="grid gap-4 md:grid-cols-2">
+                    {allProjects.map((study, index) => <CaseStudyCard key={study.id} study={study} index={index % 4} />)}
+                </div>
+            </div>
+
+            {/* Design */}
+            <div className="mx-auto mt-16 max-w-7xl px-6 pb-20 sm:px-10 lg:px-16">
+                <div className="mb-5 flex items-center gap-4">
+                    <span className="text-[10px] tracking-[0.22em] text-white/30">DESIGN</span>
+                    <div className="h-px flex-1 bg-white/10" />
+                    <span className="text-[10px] text-white/20">{designItems.length}</span>
+                </div>
+                <div className="grid gap-4 md:grid-cols-2">
+                    {designItems.map((study, index) => <CaseStudyCard key={study.id} study={study} index={index % 4} />)}
+                </div>
+            </div>
+        </main>
+    )
 }
 
 function Projects({ onSeeAll }: { onSeeAll: () => void }) {
     const { lang } = useLang()
     const s = t[lang]
-    const caseStudies = caseStudiesData.map((cs, i) => ({ ...cs, description: s.caseStudies[i].description }))
+    const caseStudies: StudyCard[] = projectsData.featured.map((p, i) => ({
+        id: p.id,
+        title: p.title,
+        tags: p.tags,
+        image: p.image,
+        link: p.link,
+        squares: featuredSquares[i] ?? defaultSquares,
+        description: lang === 'en' ? p.description_en : p.description_de,
+    }))
     const sectionRef = useRef<HTMLElement>(null)
     const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] })
     const parallax = caseStudies.map((_, index) => useSpring(useTransform(scrollYProgress, [0, 1], [0, -(80 + index * 30)]), { stiffness: 40, damping: 20 }))
@@ -561,15 +655,15 @@ function ChatWidget() {
                 </motion.div>
             )}
         </AnimatePresence>
-        <motion.button type="button" onClick={() => setOpen(prev => !prev)} whileTap={{ scale: 0.9 }} className="fixed bottom-6 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-black shadow-lg transition-transform hover:scale-105 sm:right-8">
-            {open ? <X size={22} /> : <MessageCircle size={22} />}
+        <motion.button type="button" onClick={() => setOpen(prev => !prev)} whileTap={{ scale: 0.95 }} className="fixed bottom-6 right-5 z-50 flex h-14 w-14 items-center justify-center gap-2 rounded-full bg-primary text-black shadow-lg transition-transform hover:scale-105 sm:h-auto sm:w-auto sm:px-4 sm:py-2 sm:text-sm sm:font-medium sm:right-8">
+            {open ? <X size={16} /> : <><MessageCircle size={16} /><span className="hidden sm:inline">Ask Me</span></>}
         </motion.button>
     </>
 }
 
 export default function App() {
-    const [lang, setLang] = useState<Lang>(() => (localStorage.getItem('lang') as Lang) || 'en')
-    const toggle = () => setLang(prev => { const next = prev === 'en' ? 'de' : 'en'; localStorage.setItem('lang', next); return next })
+    const [lang, setLang] = useState<Lang>(() => (localStorage.getItem('lp-lang') as Lang) || 'de')
+    const toggle = () => setLang(prev => { const next = prev === 'en' ? 'de' : 'en'; localStorage.setItem('lp-lang', next); return next })
     const [showAllProjects, setShowAllProjects] = useState(() => window.location.hash === '#all-projects')
 
     useEffect(() => {
